@@ -40,12 +40,9 @@ def PrimeSieve(n): #true sieve
     for i in range(2, n):
         if Potentials[i]:
             isq = i**2
+            result += i
             for j in range(isq, n, i):
                 Potentials[j] = False
-    
-    for e in range(len(Potentials)):
-        if Potentials[e]:
-            result += e
     return result
 
 
