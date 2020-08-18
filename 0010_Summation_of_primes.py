@@ -30,6 +30,32 @@ def SumofPrimesBelow(n):
     return sum(Primes)
 
 
+def PrimeSieve(n): #true sieve
+    sqlimit = int(n**0.5)+1
+    result = 0
+    Potentials = [True for i in range(0, n, 1)]
+    # Base cases:
+    Potentials[0], Potentials[1] = False, False
+    # implement the sieve
+    for i in range(2, n):
+        if Potentials[i]:
+            isq = i**2
+            for j in range(isq, n, i):
+                Potentials[j] = False
+    
+    for e in range(len(Potentials)):
+        if Potentials[e]:
+            result += e
+    return result
+
+
+
+
+t0 = time.time()
+x = PrimeSieve(int(2e6))
+t1 = time.time()
+print(x, t1-t0)
+
 t0 = time.time()
 sol = SumofPrimesBelow(int(2e6))
 t1 = time.time()
