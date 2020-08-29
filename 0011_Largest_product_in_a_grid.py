@@ -48,22 +48,22 @@ def adjacentproduct(source= '0011_20x20-numgrid.txt', n= 4, direction= 'downrigh
     matrix = loadfile(source)
     nrows = len(matrix)
     ncolumns = len(matrix[0]) #assumes rectangular matrix)
-    if direction == 'downleft': 
+    if direction == 'downleft': #tested, works
         i_init, j_init = 0, ncolumns - 1
-        i_stop, j_stop = nrows - n + 1, ncolumns - n + 1
+        i_stop, j_stop = nrows - n + 1, n-2
         i_incr, j_incr = 1, -1
         ikdir, jkdir = 1, -1
-    elif direction == 'downright':
+    elif direction == 'downright': #tested, works
         i_init, j_init = 0, 0
         i_stop, j_stop = nrows - n + 1, ncolumns - n + 1
         i_incr, j_incr = 1, 1
-        ikdir, jkdir = 1, -1
-    elif direction == 'horizontal':
+        ikdir, jkdir = 1, 1
+    elif direction == 'horizontal': #tested, works
         i_init, j_init = 0, 0
         i_stop, j_stop = nrows, ncolumns - n + 1
         i_incr, j_incr = 1, 1
         ikdir, jkdir = 0, 1
-    elif direction == 'vertical':
+    elif direction == 'vertical': #tested, works
         i_init, j_init = 0, 0
         i_stop, j_stop = nrows - n + 1, ncolumns
         i_incr, j_incr = 1, 1
