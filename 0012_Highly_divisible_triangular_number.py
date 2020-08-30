@@ -43,10 +43,10 @@ def factorize(num):
         # for example: num=100: 1x100, 2x50, 4x25, 5x20, 10x10
             # can reduce a lot of computational burden this way
     for i in range(1, int(num**0.5) + 1):
-        if num % i == 0: #qualification by trial division, yay super not-fast!
-            if i == num//i: #don't list the middle-solution factor if it exists
+        if num % i == 0: #qualification by trial division, yay super!
+            if i == num//i: #don't double-list the middle-solution factor if it exists
                 factors.append(i)
-            else: #list the factor and it's mirror
+            else: #list the factor and its mirror
                 factors.append(i)
                 factors.append(num//i)
     return factors
