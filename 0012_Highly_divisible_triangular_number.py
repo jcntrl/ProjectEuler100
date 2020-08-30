@@ -31,6 +31,7 @@ import time
 def factorize(num):
     factors = []
     ## BRUTE FORCE WITH 50% REDUCED SWEEP LENGTH
+        # this wouldn't even converge within the limit of my patience (walkaway 10 minutes to do laundry) to find a TrNum with >500 factors
     # for i in range(1, num//2 + 1):
     #     if num%i == 0:
     #         factors.append(i)
@@ -38,32 +39,42 @@ def factorize(num):
     ##
     
     ## PARTIAL BRUTE FORCE, SWEEP LENGTH REDUCED TO SQRT(NUM)
+    # by noticing and acting that each factor found in ascending order has a mirrored factor descending from num:
+        # for example: num=100: 1x100, 2x50, 4x25, 5x20, 10x10
+            # can reduce a lot of computational burden this way
     for i in range(1, int(num**0.5) + 1):
-        if num % i == 0:
-            if i == num//i:
+        if num % i == 0: #qualification by trial division, yay super not-fast!
+            if i == num//i: #don't list the middle-solution factor if it exists
                 factors.append(i)
-            else:
+            else: #list the factor and it's mirror
                 factors.append(i)
                 factors.append(num//i)
     return factors
 
 def highlyDivisibleTriangleNums(n):
+    '''
+    input: n = minimum num of divisors to qualify solution
+    output: returns the first triangle number which contains > n divisors
+    '''
+    # initialize for while loop
     TNum = 0
     i = 0
     divisors = []
     while len(divisors) < n:
+        # while loop simply calls factorize function on each iteration. That is where the real meat of the solution is. Look there!
         i += 1
         TNum += i
         divisors = factorize(TNum)
     return TNum, len(divisors)
 
 
-
+# execute functions and prints the answer, and computation time for your/my local device. 
 n = 500
 t0 = time.time()
 result = highlyDivisibleTriangleNums(n)
 t1 = time.time()
 answer = "\n-------------------\nTriangle Number: {}\nnum of divisors: {}\nexecuted in {} seconds.\n-------------------\n"
 print(answer.format(result[0],result[1],t1-t0))
+# for n = 500, solution is returned in ~3.5s on my device. Slow for what I want, but well within satisfactory Project Euler requirement.
 
 
