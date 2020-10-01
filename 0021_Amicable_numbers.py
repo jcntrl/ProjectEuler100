@@ -41,7 +41,7 @@ def testifamicable(a):
 
 def sum_of_amicable_nums_to_n(n):
     listofamicablenums = []
-    for num in range(2, n):
+    for num in range(2, n+1):
         if num not in listofamicablenums:
             x = testifamicable(num)
             if x[0]:
