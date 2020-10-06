@@ -33,7 +33,7 @@ def isabundantnum(num):
 
 def abundantsset(num):
     setofabundants = set()
-    for i in range(12, num+1, 1): #even though the vast majority of abundant nums are even, a handful are odd and divisible by 5, and there's a curveball in that set too that's odd but indivisible by 5. So, i++ it is.
+    for i in range(12, num+1, 1): #even though the vast majority of abundant nums are even, a handful are odd and divisible by 5, and there's a curveball in that set too that's odd but indivisible by 5. So, one by one we march.
         if isabundantnum(i):
             setofabundants.add(i)
     return setofabundants
@@ -41,16 +41,19 @@ def abundantsset(num):
 def greatestabundantsum(limit=28123):
     # generate set of all abundant numbers to limit (inclusive) 
     soa = abundantsset(limit)
-    # then generate set of all integers that CAN be written as the sum of two abundant numbers
+    # then generate set of all integers that CAN be written as the sum of two abundant numbers that are less than the limit
     canbe = set()
     for i in soa:
         for j in soa:
-            canbe.add(i+j)
+            tmp = i+j
+            if tmp <= limit:
+                canbe.add(tmp)
     # generate list of all ints up to limit
     allints = {i for i in range(limit+1)}
     # now determine the anti-intersection (difference) of sets allints and canbe
     cannotbe = allints - canbe
     return sum(cannotbe)
+
 
 # #----------------------------------------------------------------------------
 t0 = timeit.default_timer()
@@ -58,5 +61,7 @@ r = greatestabundantsum()
 t1 = timeit.default_timer()
 dt = t1-t0
 print(r, round(dt*1e6), round(dt,1))
-# solution 4179871 completes in 5.9 seconds
+# solution 4179871 completes in 5.1 seconds
+# #----------------------------------------------------------------------------
+
 # #----------------------------------------------------------------------------
