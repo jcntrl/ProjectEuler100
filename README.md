@@ -1,2 +1,2 @@
-# ProjectEuler100
-My solutions to the first 100 Project Euler challenges
+# ProjectEuler
+My solutions to Project Euler challenges
